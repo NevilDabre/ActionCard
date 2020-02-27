@@ -1,29 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 const OuterView = styled.div`
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
 `;
 
 const Card = styled.div`
-  width: 350px;
-  height: 100px;
+  width: 300px;
+  height: 70px;
   background: rgb(255, 255, 255);
-  border: 2px solid rgb(2, 181, 246);
   box-shadow: 0px 0px 2px 0px rgba(67, 70, 74, 0),
     0px 0px 5px 0px rgba(67, 86, 100, 0.12);
-  border-radius: 17px;
+  border-radius: 10px;
   display: flex;
   flex-direction: "row";
-  font-family: HelveticaNeue-Medium;
   padding: 5px;
   margin: 5px;
+  border: 2px solid #ffffff;
+  border-color: ${props => props.isSelected && "rgb(2, 181, 246)"};
 `;
 
 const ImageView = styled.div`
-  flex: 5;
+  flex: 4;
   height: 100%;
 `;
 
@@ -31,11 +30,11 @@ const Image = styled.img`
   height: 100%;
   width: 100%;
   display: block;
-  border-radius: 17px;
+  border-radius: 8px;
 `;
 
 const ContentView = styled.div`
-  flex: 7;
+  flex: 8;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -48,23 +47,28 @@ const Title = styled.span`
 `;
 
 const Description = styled.span`
-  font-size: 14px;
+  font-size: 13px;
   letter-spacing: -0.5px;
 `;
 
 const CardElement = () => {
+  const [isSelected, setIsSelected] = useState(false);
   return (
-    <Card>
+    <Card
+      isSelected={isSelected}
+      onClick={() => {
+        setIsSelected(!isSelected);
+      }}
+    >
       <ImageView>
         <Image
           src={
-            "https://i.pinimg.com/736x/73/e6/37/73e6372d655033e44cbf9fb99cbe8216.jpg"
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQ7Q189XEh7BuTxJ7UGjoc8REnGzzoqm5j7eDoyYnKBFsP7Yu9b"
           }
         />
       </ImageView>
       <ContentView>
         <Title>Donation</Title>
-        <br />
         <Description>
           An action that helps your community outreach and education
         </Description>
@@ -75,9 +79,6 @@ const CardElement = () => {
 export default function CustomizedTooltips() {
   return (
     <OuterView>
-      <CardElement />
-      <CardElement />
-      <CardElement />
       <CardElement />
     </OuterView>
   );
